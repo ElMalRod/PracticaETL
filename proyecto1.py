@@ -107,16 +107,39 @@ plt.show()
 # ## Identificación de outliers con rango intercuartílico (IQR)
 
 # %%
+# Variables cuantitativas
+variables = ['nuevas_muertes', 'muertes_acumuladas', 'poblacion']
+
 for var in variables:
+    # Cálculo de Q1, Q3 y IQR
     Q1 = data[var].quantile(0.25)
     Q3 = data[var].quantile(0.75)
     IQR = Q3 - Q1
     lower_bound = Q1 - 1.5 * IQR
     upper_bound = Q3 + 1.5 * IQR
 
+    # Identificación de outliers
     outliers = data[(data[var] < lower_bound) | (data[var] > upper_bound)]
-    print(f"\nOutliers en {var}:")
-    print(outliers)
+    print(f"\nOutliers en {var}: {len(outliers)} encontrados")
+
+    # Verificar si la variable tiene sesgo o escala incorrecta
+    if len(outliers) > 0 or data[var].skew() > 1:
+        print(f"Aplicando transformación logarítmica a {var} debido a sesgo o outliers.")
+        data[f'{var}_log'] = np.log1p(data[var])  # Logarítmica para reducir sesgo
+        transformed_var = f'{var}_log'
+    else:
+        print(f"No es necesaria ninguna transformación para {var}.")
+        transformed_var = var
+
+    # Gráfico de boxplot
+    plt.figure(figsize=(12, 6))
+    sns.boxplot(x=data[transformed_var], color='lightblue')
+    plt.axvline(Q1, color='red', linestyle='--', label='Q1 Límite Inferior')
+    plt.axvline(Q3, color='red', linestyle='--', label='Q3 Límite Superior')
+    plt.title(f"Diagrama de caja de {transformed_var}")
+    plt.xlabel(transformed_var)
+    plt.legend()
+    plt.show()
 
 # %% [markdown]
 # ## EDA Multivariable: Gráficas de dispersión
