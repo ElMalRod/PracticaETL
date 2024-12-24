@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Situación de COVID-19 en Guatemala 2020</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        nav {
+            background: linear-gradient(90deg, #007bff, #0056b3);
+            padding: 1em 2em;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        nav h1 {
+            margin: 0;
+            font-size: 1.8em;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        nav h1 a {
+            text-decoration: none;
+            color: white;
+        }
+
+        nav h1 a:hover {
+            color: #f8f9fa;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            margin-right: 1.5em;
+            cursor: pointer;
+            color: white;
+            font-weight: bold;
+            font-size: 1em;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        nav ul li:last-child {
+            margin-right: 0; /* Elimina margen del último ítem */
+        }
+
+        nav ul li:hover {
+            color: #f8f9fa;
+        }
+
+        nav ul li:hover::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: #f8f9fa;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        main {
+            text-align: center;
+            padding: 1em;
+        }
+
+        iframe {
+            border: none;
+            width: 100%;
+            height: calc(100vh - 150px);
+        }
+
+        .legend {
+            margin-top: 1em;
+            font-size: 1em;
+            color: #333;
+            text-align: justify;
+            line-height: 1.5; /* Espaciado entre líneas */
+            padding: 1em; /* Espaciado interno */
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav>
+        <h1><a href="#main-content">COVID-19 Guatemala</a></h1>
+        <ul>
+            <li onclick="showMunicipios()">Municipios</li>
+            <li onclick="showDepartamentos()">Departamentos</li>
+            <li onclick="showDatosGlobales()">Datos Globales</li>
+            <li onclick="showRecomendaciones()">Recomendaciones</li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main id="main-content">
+        <h2>Situación de COVID-19 en Guatemala - Año 2020</h2>
+        
+        <iframe id="reportFrame" src="https://app.powerbi.com/reportEmbed?reportId=11475aca-ca2b-46bf-ad54-c1907cb5b822&autoAuth=true&ctid=c81b4836-ae51-4ef1-9b9e-e964a103afe2" allowFullScreen="true"></iframe>
+        <div id="legend" class="legend"></div>
+    </main>
+    <script>
+        function showMunicipios() {
+            const iframe = document.getElementById('reportFrame');
+            const legend = document.getElementById('legend');
+            iframe.style.display = "block";
+            // Cambia el enlace del iframe a Municipios
+            iframe.src = "https://app.powerbi.com/reportEmbed?reportId=e3250b22-1eb6-4581-99b3-e4467004a654&autoAuth=true&ctid=c81b4836-ae51-4ef1-9b9e-e964a103afe2";
+            
+            // Cambia la leyenda con texto justificado
+            legend.innerHTML = `
+            <strong>Justificación de las Gráficas - Municipio</strong><br><br>
+            <ol>
+                <li>
+                    <strong>Tarjetas (Tasa de Mortalidad, Fallecimientos Máximos y Días Registrados):</strong><br>
+                    <em>Propósito:</em> Proveer datos clave de forma rápida y directa, como la tasa de mortalidad, el máximo de fallecimientos en un día y la cantidad de días registrados.<br>
+                    <em>Importancia:</em> Estas métricas son esenciales para entender el impacto general de la pandemia en los municipios. Ofrecen un resumen inmediato que ayuda en la toma de decisiones estratégica.
+                </li>
+                <li>
+                    <strong>Filtros Interactivos (Por Municipio y Rango de Fechas):</strong><br>
+                    <em>Propósito:</em> Permitir la selección dinámica de municipios específicos y rangos de fechas.<br>
+                    <em>Importancia:</em> Facilitan el análisis personalizado, permitiendo a los usuarios enfocar su atención en los datos más relevantes según sus necesidades. Son cruciales para explorar tendencias específicas.
+                </li>
+                <li>
+                    <strong>Gráfico de Barras (Fallecimientos Máximos por Municipio):</strong><br>
+                    <em>Propósito:</em> Comparar el número máximo de fallecimientos en diferentes municipios.<br>
+                    <em>Importancia:</em> Identifica municipios con mayor impacto de la pandemia. Ayuda a priorizar recursos en las áreas más afectadas. Visualización clara de las disparidades entre los municipios.
+                </li>
+                <li>
+                    <strong>Gráfico de Líneas (Fallecimientos Máximos por Fecha y Municipio):</strong><br>
+                    <em>Propósito:</em> Mostrar la evolución de los fallecimientos diarios en cada municipio a lo largo del tiempo.<br>
+                    <em>Importancia:</em> Permite identificar tendencias temporales como picos de fallecimientos. Ayuda a correlacionar eventos específicos (por ejemplo, cambios en políticas públicas o festividades) con aumentos en los fallecimientos.
+                </li>
+                <li>
+                    <strong>Gráfico de Indicador Circular (Coeficiente de Correlación):</strong><br>
+                    <em>Propósito:</em> Mostrar la relación entre la población y los fallecimientos en los municipios.<br>
+                    <em>Importancia:</em> Identifica si existe una correlación estadística significativa entre estos dos factores. Es útil para entender si la mortalidad está proporcionalmente distribuida respecto a la población.
+                </li>
+                <li>
+                    <strong>Gráfico de Líneas Descendentes (Correlación Población-Muertes por Municipio):</strong><br>
+                    <em>Propósito:</em> Visualizar la correlación detallada entre la población y los fallecimientos en cada municipio.<br>
+                    <em>Importancia:</em> Destaca municipios con tasas de mortalidad anómalas, donde las muertes no son proporcionales a la población. Es una herramienta valiosa para detectar disparidades que requieren atención adicional.
+                </li>
+            </ol>
+            `;
+        }
+
+        function showDepartamentos() {
+            const iframe = document.getElementById('reportFrame');
+            const legend = document.getElementById('legend');
+            iframe.style.display = "block";
+            // Cambia el enlace del iframe a Departamentos
+            iframe.src = "https://app.powerbi.com/reportEmbed?reportId=2734532e-47e7-4987-abed-c70c9a08c38e&autoAuth=true&ctid=c81b4836-ae51-4ef1-9b9e-e964a103afe2";
+
+            // Cambia la leyenda con texto justificado
+            legend.innerHTML = `
+            <strong>Justificación de las Gráficas - Departamento</strong><br><br>
+            <ol>
+                <li>
+                    <strong>Tarjetas (Tasa de Mortalidad, Departamento Mayor Impacto, Departamento Menor Impacto):</strong><br>
+                    <em>Propósito:</em> Resumir datos clave, como la tasa de mortalidad y los departamentos con mayor y menor impacto.<br>
+                    <em>Importancia:</em> Proporciona una visión rápida y efectiva para priorizar recursos y decisiones.
+                </li>
+                <li>
+                    <strong>Filtros Interactivos (Por Departamento):</strong><br>
+                    <em>Propósito:</em> Permitir la selección de departamentos específicos para análisis detallado.<br>
+                    <em>Importancia:</em> Facilita el análisis dinámico y la comparación entre departamentos.
+                </li>
+                <li>
+                    <strong>Gráfico de Líneas (Fallecimientos Totales Departamento por Día):</strong><br>
+                    <em>Propósito:</em> Mostrar la evolución de los fallecimientos en cada departamento.<br>
+                    <em>Importancia:</em> Identifica tendencias y picos críticos de la pandemia.
+                </li>
+                <li>
+                    <strong>Gráfico de Barras (Variación Diaria por Departamento):</strong><br>
+                    <em>Propósito:</em> Visualizar los cambios diarios en los fallecimientos por departamento.<br>
+                    <em>Importancia:</em> Ayuda a detectar eventos clave que afectaron las cifras.
+                </li>
+                <li>
+                    <strong>Gráfico de Barras Apiladas (Fallecimientos Mayor y Menor por Mes y Departamento):</strong><br>
+                    <em>Propósito:</em> Comparar tendencias mensuales entre departamentos más y menos afectados.<br>
+                    <em>Importancia:</em> Muestra patrones estacionales o momentos críticos.
+                </li>
+                <li>
+                    <strong>Gráfico de Donut (Variación Diaria por Departamento - Proporciones):</strong><br>
+                    <em>Propósito:</em> Representar las proporciones de fallecimientos diarios entre departamentos.<br>
+                    <em>Importancia:</em> Destaca la participación relativa de cada departamento en las cifras totales.
+                </li>
+            </ol>
+            `;
+        }
+
+        function showDatosGlobales() {
+            const iframe = document.getElementById('reportFrame');
+            const legend = document.getElementById('legend');
+            iframe.style.display = "block";
+            iframe.src = "https://app.powerbi.com/reportEmbed?reportId=337eb142-93fc-4baa-a6f9-b816877618ae&autoAuth=true&ctid=c81b4836-ae51-4ef1-9b9e-e964a103afe2";
+
+            legend.innerHTML = `
+            <strong>Justificación de las Gráficas - Datos Globales</strong><br><br>
+            <ol>
+                <li>
+                    <strong>Tarjetas (Tasa de Mortalidad, Nuevos Casos Diarios, Muertes Acumuladas):</strong><br>
+                    <em>Propósito:</em> Resumir las métricas clave relacionadas con Guatemala y el mundo.<br>
+                    <em>Importancia:</em> Destaca las diferencias en el impacto de la pandemia a nivel local y global.
+                </li>
+                <li>
+                    <strong>Filtro Interactivo (Por Rango de Fechas):</strong><br>
+                    <em>Propósito:</em> Permitir la selección de períodos específicos para análisis detallado.<br>
+                    <em>Importancia:</em> Identifica tendencias críticas en períodos relevantes.
+                </li>
+                <li>
+                    <strong>Gráfico de Líneas (Tasa Mortalidad Acumulada Guatemala vs. Promedio Global):</strong><br>
+                    <em>Propósito:</em> Comparar la evolución de la mortalidad entre Guatemala y el mundo.<br>
+                    <em>Importancia:</em> Ayuda a visualizar tendencias y desviaciones importantes.
+                </li>
+                <li>
+                    <strong>Gráfico de Barras y Líneas Combinadas (Nuevos Casos vs. Muertes Globales):</strong><br>
+                    <em>Propósito:</em> Mostrar las relaciones entre las cifras locales y globales.<br>
+                    <em>Importancia:</em> Resalta la conexión entre los casos diarios locales y el impacto global.
+                </li>
+                <li>
+                    <strong>Gráfico de Barras (Nuevos Casos Diarios):</strong><br>
+                    <em>Propósito:</em> Comparar los nuevos casos diarios entre Guatemala y el mundo.<br>
+                    <em>Importancia:</em> Muestra similitudes y diferencias en la propagación del virus.
+                </li>
+            </ol>
+            `;
+        }
+
+        function showRecomendaciones() {
+            const iframe = document.getElementById('reportFrame');
+            const legend = document.getElementById('legend');
+
+            // Oculta el iframe
+            iframe.style.display = "none";
+
+            // Muestra las recomendaciones
+            legend.innerHTML = `
+                <strong>Recomendaciones Basadas en los Datos</strong><br><br>
+                <ol>
+                    <li><strong>Refuerzo de Recursos en Áreas Críticas:</strong> Priorizar la asignación de recursos médicos y logísticos a los municipios y departamentos con las tasas más altas de mortalidad y mayor número de casos diarios.</li>
+                    <li><strong>Implementación de Políticas de Prevención en Municipios Vulnerables:</strong> Establecer medidas preventivas más estrictas en los municipios con altas tasas de mortalidad, como campañas de vacunación y educación sobre el uso de mascarillas.</li>
+                    <li><strong>Seguimiento Constante de Tendencias Temporales:</strong> Monitorear los picos en nuevos casos diarios para correlacionarlos con eventos específicos y ajustar estrategias preventivas oportunamente.</li>
+                    <li><strong>Comparación Continua con Datos Globales:</strong> Utilizar la comparación de las tasas de mortalidad locales con las globales para evaluar la efectividad de las políticas públicas implementadas.</li>
+                    <li><strong>Campañas de Concienciación en Municipios con Baja Mortalidad:</strong> Asegurarse de que municipios con bajas tasas de mortalidad no relajen las medidas preventivas, manteniendo un enfoque proactivo en la prevención.</li>
+                </ol>
+            `;
+
+            // Ajusta el diseño para centrarse en las recomendaciones
+            legend.style.display = "block";
+            legend.style.textAlign = "justify";
+            legend.style.padding = "2em";
+        }
+
+
+    </script>
+</body>
+</html>
