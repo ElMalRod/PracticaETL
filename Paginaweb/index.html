@@ -12,60 +12,50 @@
         }
 
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to bottom, #dae4eb, #dae4eb);
+            color: #333;
         }
 
+        /* Navbar styles */
         nav {
-            background: linear-gradient(90deg, #007bff, #0056b3);
-            padding: 1em 2em;
-            color: white;
+            background: linear-gradient(90deg, #032e89, #2575fc);
+            padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         nav h1 {
-            margin: 0;
-            font-size: 1.8em;
+            font-size: 1.8rem;
+            color: #fff;
             font-weight: bold;
             text-transform: uppercase;
-            letter-spacing: 1px;
         }
 
         nav h1 a {
             text-decoration: none;
-            color: white;
-        }
-
-        nav h1 a:hover {
-            color: #f8f9fa;
+            color: inherit;
         }
 
         nav ul {
             list-style: none;
             display: flex;
-            margin: 0;
-            padding: 0;
+            gap: 1.5rem;
         }
 
         nav ul li {
-            margin-right: 1.5em;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #fff;
             cursor: pointer;
-            color: white;
-            font-weight: bold;
-            font-size: 1em;
-            position: relative;
             transition: all 0.3s ease;
-        }
-
-        nav ul li:last-child {
-            margin-right: 0; /* Elimina margen del último ítem */
+            position: relative;
         }
 
         nav ul li:hover {
-            color: #f8f9fa;
+            color: #f1f1f1;
         }
 
         nav ul li:hover::after {
@@ -73,22 +63,32 @@
             position: absolute;
             bottom: -5px;
             left: 0;
-            right: 0;
+            width: 100%;
             height: 3px;
-            background: #f8f9fa;
-            border-radius: 5px;
-            transition: all 0.3s ease;
+            background-color: #fff;
+            border-radius: 2px;
         }
 
+        /* Main content */
         main {
+            flex: 1;
             text-align: center;
-            padding: 1em;
+            padding: 3rem 1.5rem;
+            background: url('https://source.unsplash.com/1920x1080/?health,virus') no-repeat center center/cover;
+            color: #032e89;
+        }
+
+        main h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
         }
 
         iframe {
             border: none;
             width: 100%;
-            height: calc(100vh - 150px);
+            height: calc(100vh - 200px);
         }
 
         .legend {
@@ -96,13 +96,26 @@
             font-size: 1em;
             color: #333;
             text-align: justify;
-            line-height: 1.5; /* Espaciado entre líneas */
-            padding: 1em; /* Espaciado interno */
+            line-height: 1.5;
+            padding: 1em;
             background-color: white;
             border: 1px solid #ccc;
             border-radius: 8px;
+            padding: 1.5rem;
+        }
+
+        /* Footer styles */
+        footer {
+            background: linear-gradient(90deg, #131313, #032e89);
+            color: #fff;
+            text-align: center;
+            padding: 1rem 0;
+            font-size: 0.9rem;
+            font-weight: bold;
+            text-transform: uppercase;
         }
     </style>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <!-- Navbar -->
@@ -119,9 +132,9 @@
     <!-- Main Content -->
     <main id="main-content">
         <h2>Situación de COVID-19 en Guatemala - Año 2020</h2>
-        
         <iframe id="reportFrame" src="https://app.powerbi.com/reportEmbed?reportId=11475aca-ca2b-46bf-ad54-c1907cb5b822&autoAuth=true&ctid=c81b4836-ae51-4ef1-9b9e-e964a103afe2" allowFullScreen="true"></iframe>
-        <div id="legend" class="legend"></div>
+        <div id="legend" class="legend">
+        </div>
     </main>
     <script>
         function showMunicipios() {
@@ -196,12 +209,12 @@
                     <em>Importancia:</em> Identifica tendencias y picos críticos de la pandemia.
                 </li>
                 <li>
-                    <strong>Gráfico de Barras (Variación Diaria por Departamento):</strong><br>
+                    <strong>Gráfico de Barras Apiladas (Variación Diaria por Departamento):</strong><br>
                     <em>Propósito:</em> Visualizar los cambios diarios en los fallecimientos por departamento.<br>
                     <em>Importancia:</em> Ayuda a detectar eventos clave que afectaron las cifras.
                 </li>
                 <li>
-                    <strong>Gráfico de Barras Apiladas (Fallecimientos Mayor y Menor por Mes y Departamento):</strong><br>
+                    <strong>Gráfico de Barras (Fallecimientos Mayor y Menor por Mes y Departamento):</strong><br>
                     <em>Propósito:</em> Comparar tendencias mensuales entre departamentos más y menos afectados.<br>
                     <em>Importancia:</em> Muestra patrones estacionales o momentos críticos.
                 </li>
@@ -279,5 +292,9 @@
 
 
     </script>
+
+<footer>
+    Luis Emilio Maldonado Rodríguez - 201931707
+</footer>
 </body>
 </html>
